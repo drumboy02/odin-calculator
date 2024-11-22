@@ -12,18 +12,37 @@ body {
     text-align: center;
     height: 400px;
     width: 350px;
-    border: 4px solid darkred;
+    min-width: 350px;
+    border: 12px solid darkred;
     border-radius: 12px;
 }
 
 .display {
+    /* vacuum flourescent??? undecided
+    background: black;
+    color: red;
+    */
     background: gray;
+    height: 60px;
+    border: 2px solid black;
 }
 
 .buttons {
-    background: snow;
+    background: bisque;
+    border: 12px solid darkred;
+    display: flex;
+    justify-content: center;
+    height: 80%;
 }
 
 .btn-row {
-    background: orange;
+    background: orange; 
+    border-radius: 12px; /* background and border-radius are undecided */
+    margin: 8px;
+}
+
+.btn {
+    width: 52px;
+    height: 50px;
+    margin: 2px;
 }
