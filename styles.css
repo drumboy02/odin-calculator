@@ -1,5 +1,5 @@
 body {
-    background: #000;
+    background: orange;
     margin: 0 auto;
     display: flex;
     justify-content: center;
@@ -10,19 +10,16 @@ body {
 .calculator {
     background: bisque;
     text-align: center;
-    height: 400px;
-    width: 350px;
+    height: 425px;
     min-width: 350px;
-    border: 12px solid darkred;
+    border: 40px ridge darkred;
     border-radius: 12px;
 }
 
 .display {
-    /* vacuum flourescent??? undecided
+     
     background: black;
     color: red;
-    */
-    background: gray;
     height: 60px;
     border: 2px solid black;
 }
@@ -30,19 +27,17 @@ body {
 .buttons {
     background: bisque;
     border: 12px solid darkred;
-    display: flex;
-    justify-content: center;
     height: 80%;
 }
 
 .btn-row {
-    background: orange; 
-    border-radius: 12px; /* background and border-radius are undecided */
-    margin: 8px;
+    margin: 8px; 
 }
 
 .btn {
-    width: 52px;
-    height: 50px;
+    padding: 15.8px;
+    width: 64px;
     margin: 2px;
+    border: 4px outset black;
+    border-radius: 3px;
 }
