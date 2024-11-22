@@ -35,11 +35,3 @@ function operate(op, a, b) {
             return "ERROR";
     }
 }
-
-operandA = 4;
-operandB = 2;
-operator = "/";
-
-console.log(
-    "operate(): " + operate(operator, operandA, operandB)
-)
