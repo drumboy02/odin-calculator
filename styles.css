@@ -11,17 +11,22 @@ body {
     background: bisque;
     text-align: center;
     height: 425px;
-    min-width: 350px;
+    min-width: 325px;
     border: 40px ridge darkred;
     border-radius: 12px;
 }
 
-.display {
-     
+.display {     
     background: black;
     color: red;
-    height: 60px;
+    font-size: 54px;
+    font-family: Roboto, sans-serif;
+    text-align: right;
+    height: 58px;
     border: 2px solid black;
+    padding-right: 8px;
+    padding-top: 4px;
+    padding-bottom: 4px;
 }
 
 .buttons {
@@ -40,4 +45,12 @@ body {
     margin: 2px;
     border: 4px outset black;
     border-radius: 3px;
+}
+
+.btn:hover {
+    background: orange;
+}
+
+.btn:active {
+    background: hsl(0 0 100);
 }
