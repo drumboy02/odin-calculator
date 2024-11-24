@@ -1,3 +1,6 @@
+const digits = document.querySelectorAll('.digit');
+const operators = document.querySelectorAll('.operator');
+
 // add function
 function add(a, b) {
     return a + b;
@@ -34,4 +37,8 @@ function operate(op, a, b) {
         default:
             return "ERROR";
     }
+}
+
+function displayDigit() {
+
 }

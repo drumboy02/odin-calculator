@@ -45,12 +45,26 @@ body {
     margin: 2px;
     border: 4px outset black;
     border-radius: 3px;
+    font-weight: 900;
 }
 
 .btn:hover {
     background: orange;
+    cursor: pointer;
 }
 
 .btn:active {
-    background: hsl(0 0 100);
+    background: hsl(0 0 92);
+}
+
+#btn-0 {
+    width: 136.2px;
+}
+
+.operator {
+    background: lightgray;
+}
+
+.other {
+    background: gray;
 }
