@@ -24,14 +24,14 @@ body {
     text-align: right;
     height: 58px;
     border: 2px solid black;
-    padding-right: 8px;
+    padding-right: 8.5px;
     padding-top: 4px;
     padding-bottom: 4px;
 }
 
 .buttons {
     background: bisque;
-    border: 12px solid darkred;
+    border: 7.6px solid gray;
     height: 80%;
 }
 

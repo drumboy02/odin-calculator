@@ -1,5 +1,45 @@
+const display = document.querySelector('.display');
+const clearBtn = document.querySelector('#btn-clear');
+const plusMinus = document.querySelector('#btn-plus-minus')
 const digits = document.querySelectorAll('.digit');
 const operators = document.querySelectorAll('.operator');
+
+let displayValue = 0;
+display.textContent = displayValue;
+
+// clear button
+clearBtn.addEventListener('click', () => {
+    display.textContent = 0;
+    displayValue = +display.textContent;
+    console.log(displayValue);
+})
+
+// plus-minus button
+plusMinus.addEventListener('click', () => {
+    displayValue = -displayValue;
+    display.textContent = displayValue;
+    console.log(displayValue);
+})
+
+// digit buttons
+digits.forEach(digit => {
+    digit.addEventListener('click', () => {
+        // check the value 
+        if (displayValue === 0) {
+            display.textContent = '';
+        } else if (display.textContent === 'ERROR') {
+            return;
+        }
+        display.textContent += digit.value;
+        // limit the value length
+        if (display.textContent.length > 10) {
+            display.textContent = 'ERROR';
+        }
+        // store the value
+        displayValue = +display.textContent;
+        console.log(displayValue);
+    })
+})
 
 // add function
 function add(a, b) {
@@ -37,8 +77,4 @@ function operate(op, a, b) {
         default:
             return "ERROR";
     }
-}
-
-function displayDigit() {
-
 }
