@@ -14,12 +14,26 @@ display.textContent = displayValue;
 // digit buttons
 digits.forEach(digit => {
     digit.addEventListener('click', () => {
+        // check for zero, decimal, negative and length
         if (display.textContent === '0') {
             display.textContent = '';
         }
-        if (display.textContent.length > 8) {
+        if (display.textContent.indexOf('.') !== -1 && display.textContent.indexOf('-') !== -1) {
+            if (display.textContent.length > 10) {
+                return;
+            }
+        } else if (display.textContent.indexOf('.') !== -1) {
+            if (display.textContent.length > 9) {
+                return;
+            }
+        } else if (display.textContent.indexOf('-') !== -1) {
+            if (display.textContent.length > 9) {
+                return;
+            }
+        } else if (display.textContent.length > 8) {
             return;
         }
+
         display.textContent += digit.value;
         displayValue = +display.textContent;
         // temp
