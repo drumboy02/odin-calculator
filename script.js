@@ -14,8 +14,8 @@ display.textContent = displayValue;
 // digit buttons
 digits.forEach(digit => {
     digit.addEventListener('click', () => {
-        // check for zero, decimal, negative and length
-        if (display.textContent === '0') {
+        // check for zero, error, decimal, negative and length
+        if (display.textContent === '0' || display.textContent === 'ERROR') {
             display.textContent = '';
         }
         if (display.textContent.indexOf('.') !== -1 && display.textContent.indexOf('-') !== -1) {
@@ -45,6 +45,7 @@ digits.forEach(digit => {
 clearBtn.addEventListener('click', () => {
     display.textContent = '0';
     displayValue = +display.textContent;
+
     // temp
     temp.textContent = typeof displayValue + ': ' + displayValue;
 
@@ -54,6 +55,20 @@ clearBtn.addEventListener('click', () => {
 plusMinus.addEventListener('click', () => {
     displayValue = -displayValue;
     display.textContent = displayValue;
+
+    // temp
+    temp.textContent = typeof displayValue + ': ' + displayValue;
+})
+
+// percent buttton
+percentBtn.addEventListener('click', () => {
+    displayValue = displayValue / 100;
+    display.textContent = displayValue;
+    if (display.textContent.length > 10) {
+        display.textContent = "ERROR";
+        displayValue = 0;
+    }
+    
     // temp
     temp.textContent = typeof displayValue + ': ' + displayValue;
 })
@@ -64,6 +79,7 @@ decimal.addEventListener('click', () => {
         display.textContent += '.';
     }
     displayValue = +display.textContent;
+
     // temp
     temp.textContent = typeof displayValue + ': ' + displayValue;
 })
