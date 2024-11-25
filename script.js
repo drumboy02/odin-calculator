@@ -1,44 +1,57 @@
 const display = document.querySelector('.display');
 const clearBtn = document.querySelector('#btn-clear');
-const plusMinus = document.querySelector('#btn-plus-minus')
+const plusMinus = document.querySelector('#btn-plus-minus');
+const percentBtn = document.querySelector('#btn-percent');
 const digits = document.querySelectorAll('.digit');
+const decimal = document.querySelector('#btn-decimal');
 const operators = document.querySelectorAll('.operator');
+// temp variable for displayValue on screen
+const temp = document.querySelector('.temp');
 
 let displayValue = 0;
 display.textContent = displayValue;
 
+// digit buttons
+digits.forEach(digit => {
+    digit.addEventListener('click', () => {
+        if (display.textContent === '0') {
+            display.textContent = '';
+        }
+        if (display.textContent.length > 8) {
+            return;
+        }
+        display.textContent += digit.value;
+        displayValue = +display.textContent;
+        // temp
+        temp.textContent = typeof displayValue + ': ' + displayValue;
+    })
+})
+
 // clear button
 clearBtn.addEventListener('click', () => {
-    display.textContent = 0;
+    display.textContent = '0';
     displayValue = +display.textContent;
-    console.log(displayValue);
+    // temp
+    temp.textContent = typeof displayValue + ': ' + displayValue;
+
 })
 
 // plus-minus button
 plusMinus.addEventListener('click', () => {
     displayValue = -displayValue;
     display.textContent = displayValue;
-    console.log(displayValue);
+    // temp
+    temp.textContent = typeof displayValue + ': ' + displayValue;
 })
 
-// digit buttons
-digits.forEach(digit => {
-    digit.addEventListener('click', () => {
-        // check the value 
-        if (displayValue === 0) {
-            display.textContent = '';
-        } else if (display.textContent === 'ERROR') {
-            return;
-        }
-        display.textContent += digit.value;
-        // limit the value length
-        if (display.textContent.length > 10) {
-            display.textContent = 'ERROR';
-        }
-        // store the value
-        displayValue = +display.textContent;
-        console.log(displayValue);
-    })
+// decimal button
+decimal.addEventListener('click', () => {
+    if (display.textContent.indexOf('.') === -1) {
+        display.textContent += '.';
+    }
+    displayValue = +display.textContent;
+    // temp
+    temp.textContent = typeof displayValue + ': ' + displayValue;
 })
 
 // add function

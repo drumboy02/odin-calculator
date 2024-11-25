@@ -5,6 +5,9 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+
+    /*for temp*/
+    flex-direction: column;
 }
 
 .calculator {
