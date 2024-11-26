@@ -47,7 +47,16 @@ function operate(op, a, b) {
     }
 }
 
-function calculate() {
+// operator buttons
+function operation() {
+    operators.forEach(operator => {
+        operator.addEventListener('click', () => {
+            console.log(operator.value);
+        })
+    })
+}
+
+function calculator() {
     let displayValue = 0;
     display.textContent = displayValue;
     
@@ -99,7 +108,14 @@ function calculate() {
     
         // limit the length in display
         if (display.textContent.length > 10) {
-            let strSlice = display.textContent.slice(0, 10);
+            let strSlice;
+            // check for decimal
+            if (display.textContent.indexOf('.') !== -1) {
+                strSlice = display.textContent.slice(0, 10); 
+            } else {
+                strSlice = display.textContent.slice(0, 10);
+            }
+
             display.textContent = strSlice;
         }
         // temp
@@ -112,8 +128,16 @@ function calculate() {
         display.textContent = displayValue;
     
         // limit the length in display
+        
         if (display.textContent.length > 10) {
-            let strSlice = display.textContent.slice(0, 10);
+            let strSlice;
+            // check for negative
+            if (display.textContent.indexOf('-') !== -1) {
+                strSlice = display.textContent.slice(0, 11); 
+            } else {
+                strSlice = display.textContent.slice(0, 10);
+            }
+
             display.textContent = strSlice;
         }
     
@@ -134,4 +158,5 @@ function calculate() {
     })
 }
 
-calculate()
+calculator()
+operation()
