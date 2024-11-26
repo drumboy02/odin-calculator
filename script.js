@@ -5,84 +5,9 @@ const percentBtn = document.querySelector('#btn-percent');
 const digits = document.querySelectorAll('.digit');
 const decimal = document.querySelector('#btn-decimal');
 const operators = document.querySelectorAll('.operator');
+
 // temp variable for displayValue on screen
 const temp = document.querySelector('.temp');
-
-let displayValue = 0;
-display.textContent = displayValue;
-
-// digit buttons
-digits.forEach(digit => {
-    digit.addEventListener('click', () => {
-        // check for zero, error, decimal, negative and length
-        if (display.textContent === '0' || display.textContent === 'ERROR') {
-            display.textContent = '';
-        }
-        if (display.textContent.indexOf('.') !== -1 && display.textContent.indexOf('-') !== -1) {
-            if (display.textContent.length > 10) {
-                return;
-            }
-        } else if (display.textContent.indexOf('.') !== -1) {
-            if (display.textContent.length > 9) {
-                return;
-            }
-        } else if (display.textContent.indexOf('-') !== -1) {
-            if (display.textContent.length > 9) {
-                return;
-            }
-        } else if (display.textContent.length > 8) {
-            return;
-        }
-
-        display.textContent += digit.value;
-        displayValue = +display.textContent;
-        // temp
-        temp.textContent = typeof displayValue + ': ' + displayValue;
-    })
-})
-
-// clear button
-clearBtn.addEventListener('click', () => {
-    display.textContent = '0';
-    displayValue = +display.textContent;
-
-    // temp
-    temp.textContent = typeof displayValue + ': ' + displayValue;
-
-})
-
-// plus-minus button
-plusMinus.addEventListener('click', () => {
-    displayValue = -displayValue;
-    display.textContent = displayValue;
-
-    // temp
-    temp.textContent = typeof displayValue + ': ' + displayValue;
-})
-
-// percent buttton
-percentBtn.addEventListener('click', () => {
-    displayValue = displayValue / 100;
-    display.textContent = displayValue;
-    if (display.textContent.length > 10) {
-        display.textContent = "ERROR";
-        displayValue = 0;
-    }
-    
-    // temp
-    temp.textContent = typeof displayValue + ': ' + displayValue;
-})
-
-// decimal button
-decimal.addEventListener('click', () => {
-    if (display.textContent.indexOf('.') === -1) {
-        display.textContent += '.';
-    }
-    displayValue = +display.textContent;
-
-    // temp
-    temp.textContent = typeof displayValue + ': ' + displayValue;
-})
 
 // add function
 function add(a, b) {
@@ -121,3 +46,92 @@ function operate(op, a, b) {
             return "ERROR";
     }
 }
+
+function calculate() {
+    let displayValue = 0;
+    display.textContent = displayValue;
+    
+    // digit buttons
+    digits.forEach(digit => {
+        digit.addEventListener('click', () => {
+            // check for zero/error
+            if (display.textContent === '0' || display.textContent === 'ERROR') {
+                display.textContent = '';
+            }
+            // check for decimal/negative, limit the length in display
+            if (display.textContent.indexOf('.') !== -1 && display.textContent.indexOf('-') !== -1) {
+                if (display.textContent.length > 10) {
+                    return;
+                }
+            } else if (display.textContent.indexOf('.') !== -1) {
+                if (display.textContent.length > 9) {
+                    return;
+                }
+            } else if (display.textContent.indexOf('-') !== -1) {
+                if (display.textContent.length > 9) {
+                    return;
+                }
+            } else if (display.textContent.length > 8) {
+                return;
+            }
+    
+            display.textContent += digit.value;
+            displayValue = +display.textContent;
+            // temp
+            temp.textContent = typeof displayValue + ': ' + displayValue;
+        })
+    })
+    
+    // clear button
+    clearBtn.addEventListener('click', () => {
+        display.textContent = '0';
+        displayValue = +display.textContent;
+    
+        // temp
+        temp.textContent = typeof displayValue + ': ' + displayValue;
+    
+    })
+    
+    // plus-minus button
+    plusMinus.addEventListener('click', () => {
+        displayValue = -displayValue;
+        display.textContent = displayValue;
+    
+        // limit the length in display
+        if (display.textContent.length > 10) {
+            let strSlice = display.textContent.slice(0, 10);
+            display.textContent = strSlice;
+        }
+        // temp
+        temp.textContent = typeof displayValue + ': ' + displayValue;
+    })
+    
+    // percent buttton
+    percentBtn.addEventListener('click', () => {
+        displayValue = displayValue / 100;
+        display.textContent = displayValue;
+    
+        // limit the length in display
+        if (display.textContent.length > 10) {
+            let strSlice = display.textContent.slice(0, 10);
+            display.textContent = strSlice;
+        }
+    
+        // temp
+        temp.textContent = typeof displayValue + ': ' + displayValue;
+    })
+    
+    // decimal button
+    decimal.addEventListener('click', () => {
+        // check for decimal first
+        if (display.textContent.indexOf('.') === -1) {
+            display.textContent += '.';
+        }
+        displayValue = +display.textContent;
+    
+        // temp
+        temp.textContent = typeof displayValue + ': ' + displayValue;
+    })
+}
+
+calculate()
