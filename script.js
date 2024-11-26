@@ -6,8 +6,11 @@ const digits = document.querySelectorAll('.digit');
 const decimal = document.querySelector('#btn-decimal');
 const operators = document.querySelectorAll('.operator');
 
-// temp variable for displayValue on screen
+// temp variables for displayValue on screen
 const temp = document.querySelector('.temp');
+const opA = document.querySelector('.operandA');
+const op = document.querySelector('.op');
+const opB = document.querySelector('.operandB');
 
 // add function
 function add(a, b) {
@@ -28,8 +31,8 @@ function divide(a, b) {
 
 // create 3 variables for each part of operation
 let operandA;
-let operandB;
 let operator;
+let operandB;
 
 // create operate function
 function operate(op, a, b) {
@@ -47,15 +50,6 @@ function operate(op, a, b) {
     }
 }
 
-// operator buttons
-function operation() {
-    operators.forEach(operator => {
-        operator.addEventListener('click', () => {
-            console.log(operator.value);
-        })
-    })
-}
-
 function calculator() {
     let displayValue = 0;
     display.textContent = displayValue;
@@ -63,6 +57,10 @@ function calculator() {
     // digit buttons
     digits.forEach(digit => {
         digit.addEventListener('click', () => {
+            // check for null value
+            if (displayValue === null) {
+                display.textContent = '';
+            }
             // check for zero/error
             if (display.textContent === '0' || display.textContent === 'ERROR') {
                 display.textContent = '';
@@ -95,10 +93,15 @@ function calculator() {
     clearBtn.addEventListener('click', () => {
         display.textContent = '0';
         displayValue = +display.textContent;
+        operandA = 0;
+        operator = null;
+        operandB = 0;
     
         // temp
         temp.textContent = typeof displayValue + ': ' + displayValue;
-    
+        opA.textContent = operandA;
+        op.textContent = null;
+        opB.textContent = operandB;
     })
     
     // plus-minus button
@@ -127,8 +130,7 @@ function calculator() {
         displayValue = displayValue / 100;
         display.textContent = displayValue;
     
-        // limit the length in display
-        
+        // limit the length in display        
         if (display.textContent.length > 10) {
             let strSlice;
             // check for negative
@@ -156,7 +158,26 @@ function calculator() {
         // temp
         temp.textContent = typeof displayValue + ': ' + displayValue;
     })
+
+    // operator buttons
+    function operation() {
+        operators.forEach(symbol => {
+            symbol.addEventListener('click', () => {
+                // get the operator
+                operator = symbol.value;
+                // temp
+                op.textContent = operator;
+                if (!operandA) {
+                    operandA = displayValue;
+                    displayValue = null;
+                    // temp
+                    temp.textContent = typeof displayValue + ': ' + displayValue;
+                    opA.textContent = "A: " + operandA;
+                }
+            })
+        })
+    }
+    operation()
 }
 
 calculator()
-operation()

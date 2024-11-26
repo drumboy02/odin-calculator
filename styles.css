@@ -71,3 +71,8 @@ body {
 .other {
     background: gray;
 }
+
+/* for temp */
+h1, h3{
+    margin: 0;
+}
