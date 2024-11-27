@@ -37,6 +37,9 @@ let operandB;
 
 // create operate function
 function operate(op, a, b) {
+    console.log("a: " + a)
+    console.log(op)
+    console.log("b: " + b)
     switch (op) {
         case "+":
             return add(a, b);
@@ -107,15 +110,21 @@ function calculator() {
     
     // plus-minus button
     plusMinus.addEventListener('click', () => {
-        displayValue = -displayValue;
-        display.textContent = displayValue;
-    
+        if (!displayValue && operandA) {
+            displayValue = operandA;
+            displayValue = -displayValue;
+            display.textContent = displayValue;
+        } else {
+            displayValue = -displayValue;
+            display.textContent = displayValue;
+        }
+
         // limit the length in display
         if (display.textContent.length > 10) {
             let strSlice;
             // check for decimal
             if (display.textContent.indexOf('.') !== -1) {
-                strSlice = display.textContent.slice(0, 10); 
+                strSlice = display.textContent.slice(0, 11); 
             } else {
                 strSlice = display.textContent.slice(0, 10);
             }
@@ -128,15 +137,26 @@ function calculator() {
     
     // percent buttton
     percentBtn.addEventListener('click', () => {
-        displayValue = displayValue / 100;
-        display.textContent = displayValue;
+        if (!displayValue && operandA) {
+            operandA = operandA / 100;
+            displayValue = operandA;
+            display.textContent = displayValue;
+        } else {
+            displayValue = displayValue / 100;
+            display.textContent = displayValue;
+        }
+
     
         // limit the length in display        
         if (display.textContent.length > 10) {
             let strSlice;
             // check for negative
             if (display.textContent.indexOf('-') !== -1) {
-                strSlice = display.textContent.slice(0, 11); 
+                if (display.textContent.indexOf('e') !== -1) {
+                    strSlice = display.textContent.slice(0, 10);
+                } else {
+                    strSlice = display.textContent.slice(0, 11); 
+                }
             } else {
                 strSlice = display.textContent.slice(0, 10);
             }
@@ -171,15 +191,20 @@ function calculator() {
             } else if (operator && operandA && displayValue) {
                 // if there's a value already
                 result = operate(operator, operandA, displayValue);
+
+                console.log('result: ' + result);
                 display.textContent = result;
+
                 operandA = result;
                 displayValue = null;
 
                 // then get operator
                 operator = symbol.value;
             }
+
             // temp
-            op.textContent = operator;    
+            op.textContent = operator;
+
             // if bank A is empty
             if (!operandA && displayValue !== null) {
                 operandA = displayValue;
@@ -214,9 +239,12 @@ function calculator() {
     equal.addEventListener('click', () => {
         console.log('equal');
         if (operator && operandA && displayValue && !operandB) {
-            result = operate(operator, operandA, displayValue) 
+            result = operate(operator, operandA, displayValue);
+            
+            console.log('result: ' + result);
             display.textContent = result;
-            operandA = result;
+
+            operandA = 0;
             displayValue = null;
             operator = null;
         }
