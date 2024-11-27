@@ -99,9 +99,9 @@ function calculator() {
     
         // temp
         temp.textContent = typeof displayValue + ': ' + displayValue;
-        opA.textContent = operandA;
-        op.textContent = null;
-        opB.textContent = operandB;
+        opA.textContent = typeof operandA + ' A: ' + operandA;
+        op.textContent = operator;
+        opB.textContent = typeof operandB + ' B: ' + operandB;
     })
     
     // plus-minus button
@@ -160,24 +160,32 @@ function calculator() {
     })
 
     // operator buttons
-    function operation() {
-        operators.forEach(symbol => {
-            symbol.addEventListener('click', () => {
-                // get the operator
-                operator = symbol.value;
-                // temp
-                op.textContent = operator;
-                if (!operandA) {
-                    operandA = displayValue;
-                    displayValue = null;
-                    // temp
-                    temp.textContent = typeof displayValue + ': ' + displayValue;
-                    opA.textContent = "A: " + operandA;
-                }
-            })
+    operators.forEach(symbol => {
+        symbol.addEventListener('click', () => {
+            // get the operator
+            operator = symbol.value;
+
+            // temp
+            op.textContent = operator;
+                
+            // if bank A is empty
+            if (!operandA) {
+                operandA = displayValue;
+            } else {
+            // if bank B is empty, copy B to A?
+                operandB = displayValue;
+                operandA = operandB;
+            }
+            // dislayValue, not textContent
+            displayValue = null;
+
+            // temp 
+            temp.textContent = typeof displayValue + ': ' + displayValue;
+            opA.textContent = typeof operandA + ' A: ' + operandA;
+            opB.textContent = typeof operandB + ' B: ' + operandB;
+            console.log(operandA, operator, operandB);
         })
-    }
-    operation()
+    })
 }
 
 calculator()
