@@ -64,7 +64,7 @@ body {
     width: 136.2px;
 }
 
-.operator {
+.operator, .equal{
     background: lightgray;
 }
 

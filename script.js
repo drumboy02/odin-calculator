@@ -5,6 +5,7 @@ const percentBtn = document.querySelector('#btn-percent');
 const digits = document.querySelectorAll('.digit');
 const decimal = document.querySelector('#btn-decimal');
 const operators = document.querySelectorAll('.operator');
+const equal = document.querySelector('#btn-equal');
 
 // temp variables for displayValue on screen
 const temp = document.querySelector('.temp');
@@ -163,28 +164,68 @@ function calculator() {
     operators.forEach(symbol => {
         symbol.addEventListener('click', () => {
             // get the operator
-            operator = symbol.value;
+            
+            // if null or no value stored
+            if (!operator || !displayValue) {
+                operator = symbol.value;
+            } else if (operator && operandA && displayValue) {
+                // if there's a value already
+                result = operate(operator, operandA, displayValue);
+                display.textContent = result;
+                operandA = result;
+                displayValue = null;
 
+                // then get operator
+                operator = symbol.value;
+            }
             // temp
-            op.textContent = operator;
-                
+            op.textContent = operator;    
             // if bank A is empty
-            if (!operandA) {
+            if (!operandA && displayValue !== null) {
                 operandA = displayValue;
             } else {
-            // if bank B is empty, copy B to A?
+            // if bank B is empty
                 operandB = displayValue;
-                operandA = operandB;
+            }
+            
+            console.log(operandA, operator, operandB); 
+
+            // solve
+            if (operandA && operandB) {
+                result = operate(operator, operandA, operandB);
+
+                console.log('result: ' + result);
+                display.textContent = result;
+                operandA = result;
             }
             // dislayValue, not textContent
             displayValue = null;
+            operandB = 0;
 
             // temp 
             temp.textContent = typeof displayValue + ': ' + displayValue;
             opA.textContent = typeof operandA + ' A: ' + operandA;
+            op.textContent = operator;
             opB.textContent = typeof operandB + ' B: ' + operandB;
-            console.log(operandA, operator, operandB);
         })
+    })
+
+    // equal button
+    equal.addEventListener('click', () => {
+        console.log('equal');
+        if (operator && operandA && displayValue && !operandB) {
+            result = operate(operator, operandA, displayValue) 
+            display.textContent = result;
+            operandA = result;
+            displayValue = null;
+            operator = null;
+        }
+
+        // temp 
+        temp.textContent = typeof displayValue + ': ' + displayValue;
+        opA.textContent = typeof operandA + ' A: ' + operandA;
+        op.textContent = operator;
+        opB.textContent = typeof operandB + ' B: ' + operandB;
     })
 }
 
