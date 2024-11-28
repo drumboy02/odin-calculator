@@ -7,12 +7,6 @@ const decimal = document.querySelector('#btn-decimal');
 const operators = document.querySelectorAll('.operator');
 const equal = document.querySelector('#btn-equal');
 
-// temp variables for displayValue on screen
-const temp = document.querySelector('.temp');
-const opA = document.querySelector('.operandA');
-const op = document.querySelector('.op');
-const opB = document.querySelector('.operandB');
-
 // add function
 function add(a, b) {
     return a + b;
@@ -37,9 +31,6 @@ let operandB;
 
 // create operate function
 function operate(op, a, b) {
-    console.log("a: " + a)
-    console.log(op)
-    console.log("b: " + b)
     switch (op) {
         case "+":
             return add(a, b);
@@ -88,8 +79,6 @@ function calculator() {
     
             display.textContent += digit.value;
             displayValue = +display.textContent;
-            // temp
-            temp.textContent = typeof displayValue + ': ' + displayValue;
         })
     })
     
@@ -100,12 +89,6 @@ function calculator() {
         operandA = 0;
         operator = null;
         operandB = 0;
-    
-        // temp
-        temp.textContent = typeof displayValue + ': ' + displayValue;
-        opA.textContent = typeof operandA + ' A: ' + operandA;
-        op.textContent = operator;
-        opB.textContent = typeof operandB + ' B: ' + operandB;
     })
     
     // plus-minus button
@@ -131,8 +114,6 @@ function calculator() {
 
             display.textContent = strSlice;
         }
-        // temp
-        temp.textContent = typeof displayValue + ': ' + displayValue;
     })
     
     // percent buttton
@@ -163,9 +144,6 @@ function calculator() {
 
             display.textContent = strSlice;
         }
-    
-        // temp
-        temp.textContent = typeof displayValue + ': ' + displayValue;
     })
     
     // decimal button
@@ -175,9 +153,6 @@ function calculator() {
             display.textContent += '.';
         }
         displayValue = +display.textContent;
-    
-        // temp
-        temp.textContent = typeof displayValue + ': ' + displayValue;
     })
 
     // operator buttons
@@ -191,8 +166,6 @@ function calculator() {
             } else if (operator && operandA && displayValue) {
                 // if there's a value already
                 result = operate(operator, operandA, displayValue);
-
-                console.log('result: ' + result);
                 display.textContent = result;
 
                 operandA = result;
@@ -202,9 +175,6 @@ function calculator() {
                 operator = symbol.value;
             }
 
-            // temp
-            op.textContent = operator;
-
             // if bank A is empty
             if (!operandA && displayValue !== null) {
                 operandA = displayValue;
@@ -212,49 +182,32 @@ function calculator() {
             // if bank B is empty
                 operandB = displayValue;
             }
-            
-            console.log(operandA, operator, operandB); 
 
             // solve
             if (operandA && operandB) {
                 result = operate(operator, operandA, operandB);
 
-                console.log('result: ' + result);
                 display.textContent = result;
                 operandA = result;
             }
             // dislayValue, not textContent
             displayValue = null;
             operandB = 0;
-
-            // temp 
-            temp.textContent = typeof displayValue + ': ' + displayValue;
-            opA.textContent = typeof operandA + ' A: ' + operandA;
-            op.textContent = operator;
-            opB.textContent = typeof operandB + ' B: ' + operandB;
         })
     })
 
     // equal button
     equal.addEventListener('click', () => {
-        console.log('equal');
         if (operator && operandA && displayValue && !operandB) {
             result = operate(operator, operandA, displayValue);
-            
-            console.log('result: ' + result);
+
             display.textContent = result;
 
             operandA = 0;
             displayValue = null;
             operator = null;
         }
-
-        // temp 
-        temp.textContent = typeof displayValue + ': ' + displayValue;
-        opA.textContent = typeof operandA + ' A: ' + operandA;
-        op.textContent = operator;
-        opB.textContent = typeof operandB + ' B: ' + operandB;
     })
 }
 
-calculator()
+calculator();

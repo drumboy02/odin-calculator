@@ -5,9 +5,6 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-
-    /*for temp*/
-    flex-direction: column;
 }
 
 .calculator {
@@ -70,9 +67,4 @@ body {
 
 .other {
     background: gray;
-}
-
-/* for temp */
-h1, h3{
-    margin: 0;
 }
